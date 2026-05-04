@@ -36,3 +36,11 @@ def test_bookstore_starts_with_empty_list():
     store = BookStore()
 
     assert store.books == []
+
+@pytest.mark.unit
+def test_add_book_and_give_book_an_id():
+    store = BookStore()
+
+    book = store.addBook("Anna Wester", "Nybörjarkurs i Python")
+
+    assert "id" in book
