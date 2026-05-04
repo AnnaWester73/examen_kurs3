@@ -6,7 +6,7 @@ from src.bookstore import BookStore
 def test_add_book_returns_book_with_author_and_title():
     store = BookStore()
 
-    book = store.addBook("Astrid Lindgren", "Bröderna Lejonhjärta")
+    book = store.addBook("Anna Wester", "Nybörjarkurs i Python")
 
-    assert book["author"] == "Astrid Lindgren"
-    assert book["title"] == "Bröderna Lejonhjärta"
+    assert book["author"] == "Anna Wester"
+    assert book["title"] == "Nybörjarkurs i Python"
