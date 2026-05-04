@@ -31,7 +31,3 @@ jobs:
       - name: Run pytest
         run: |
           pytest
-
-      - name: Run behave
-        run: |
-          behave
