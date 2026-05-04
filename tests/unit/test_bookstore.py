@@ -37,6 +37,7 @@ def test_bookstore_starts_with_empty_list():
 
     assert store.books == []
 
+# Test där book får ett unikt id
 @pytest.mark.unit
 def test_add_book_and_give_book_an_id():
     store = BookStore()
@@ -44,3 +45,37 @@ def test_add_book_and_give_book_an_id():
     book = store.addBook("Anna Wester", "Nybörjarkurs i Python")
 
     assert "id" in book
+
+# Testar som kollar om en bok INTE är markerad som favorit
+@pytest.mark.unit
+def test_add_book_sets_favorite_to_false():
+    store = BookStore()
+
+    book = store.addBook("Anna Wester", "Nybörjarkurs i Python")
+
+    assert book["favorite"] is False
+
+
+# Test som kollar om en bok är markerad som favorit
+@pytest.mark.unit
+def test_toggle_favorite_sets_book_to_true():
+    store = BookStore()
+
+    book = store.addBook("Anna Wester", "Nybörjarkurs i Python")
+
+    store.toggleFavorite(book["id"])
+
+    assert book["favorite"] is True
+
+
+# Test att man kan ändra bok fram och tillbaka som favorit.
+@pytest.mark.unit
+def test_toggle_favorite_twice_sets_book_to_false():
+    store = BookStore()
+
+    book = store.addBook("Anna Wester", "Nybörjarkurs i Python")
+
+    store.toggleFavorite(book["id"])
+    store.toggleFavorite(book["id"])
+
+    assert book["favorite"] is False
