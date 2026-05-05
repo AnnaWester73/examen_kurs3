@@ -1,7 +1,7 @@
 Feature: Favoritböcker
 
   Scenario: Markera en bok som favorit
-    Given att jag navigerar till vyn katalog
+    Given att jag navigerar till vyn Katalog
     When jag markerar boken "Nybörjarkurs i Python" som favorit
     Then ska boken "Nybörjarkurs i Python" vara markerad som favorit
 

@@ -1,9 +1,10 @@
 Feature: Navigera mellan olika vyer
+
   Scenario: Visa startsidan
     Given att jag öppnar Läslistan
     Then ska startsidan visas med navigeringsalternativ
 
-  Scenario: Navigera till katalog
+  Scenario: Navigera till Katalog
     Given att jag öppnar startsidan för Läslistan
     When jag klickar på Katalog
     Then ska katalogen med böcker visas
@@ -19,6 +20,6 @@ Feature: Navigera mellan olika vyer
     Then ska formulär för mina favoritböcker visas
 
   Scenario: Navigera till Statistik
-    Given att jag öppnar starsidan för Läslistan
+    Given att jag öppnar startsidan för Läslistan
     When jag klickar på Statistik
-    Then ska stasistikvyn visas
+    Then ska statistikvyn visas

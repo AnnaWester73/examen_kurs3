@@ -29,7 +29,10 @@ Feature: Lägg till bok
   Scenario: Lägga till flera böcker
     Given att jag öppnar vyn Lägg till bok
     When jag fyller i titel "Nybörjarkurs i Python"
-    And jag fyller i författare "Anna Wester
+    And jag fyller i författare "Anna Wester"
     And jag klickar på Lägg till ny bok
-    And jag lägger till en till bok med titel "Annas mat" och författare "Anna Bergenström" och klickar på Lägg till ny bok
+    And jag fyller i titel "Annas mat"
+    And jag fyller i författare "Anna Bergström"
+    And jag klickar på Lägg till ny bok
     Then ska båda böckerna visas i katalogen
+
