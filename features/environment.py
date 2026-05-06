@@ -1,0 +1,16 @@
+from playwright.sync_api import sync_playwright
+from features.pages.app_page import AppPage
+
+
+def before_all(context):
+    context.playwright = sync_playwright().start()
+    context.browser = context.playwright.chromium.launch(headless=False)
+    context.page = context.browser.new_page()
+    context.page.set_default_timeout(3000)
+
+    context.app_page = AppPage(context.page)
+
+
+def after_all(context):
+    context.browser.close()
+    context.playwright.stop()

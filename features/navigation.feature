@@ -1,25 +1,24 @@
 Feature: Navigera mellan olika vyer
 
-  Scenario: Visa startsidan
+  Scenario: Visa navigeringsmenyn
     Given att jag öppnar Läslistan
-    Then ska startsidan visas med navigeringsalternativ
+    Then ska navigeringsmenyn visas
 
-  Scenario: Navigera till Katalog
-    Given att jag öppnar startsidan för Läslistan
-    When jag klickar på Katalog
-    Then ska katalogen med böcker visas
+  Scenario: Katalog är aktiv från start
+    Given att jag öppnar Läslistan
+    Then ska vyn "Katalog" visas
 
   Scenario: Navigera till Lägg till bok
-    Given att jag öppnar startsidan för Läslistan
-    When jag klickar på Lägg till bok
-    Then ska formulär för att lägga till bok visas
+    Given att jag öppnar Läslistan
+    When jag klickar på "Lägg till bok"
+    Then ska vyn "Lägg till bok" visas
 
   Scenario: Navigera till Mina böcker
-    Given att jag öppnar startsidan för Läslistan
-    When jag klickar på Mina böcker
-    Then ska formulär för mina favoritböcker visas
+    Given att jag öppnar Läslistan
+    When jag klickar på "Mina böcker"
+    Then ska vyn "Mina böcker" visas
 
   Scenario: Navigera till Statistik
-    Given att jag öppnar startsidan för Läslistan
-    When jag klickar på Statistik
-    Then ska statistikvyn visas
+    Given att jag öppnar Läslistan
+    When jag klickar på "Statistik"
+    Then ska vyn "Statistik" visas
