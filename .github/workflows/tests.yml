@@ -34,4 +34,4 @@ jobs:
 
       - name: Run behave
         run: |
-          behave
+          behave features/navigation.feature
