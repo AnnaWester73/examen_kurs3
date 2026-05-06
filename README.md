@@ -8,29 +8,25 @@ https://docs.google.com/document/d/1YFubvcXCJx71fedHHOjv6RWh-vhmXFRmh602V8g1WGo/
 ```
 - Backend-logik för att hantera en lista med böcker
 - Enhetstester (pytest)
-- Integrationstester (kommer senare)
-- Frontend-del (kommer senare)
-- BDD-tester med Behave (kommer senare)
+- Integrationstester (pytest)
+- Frontend-del
+- BDD-tester med Behave och Playwright
 - CI med GitHub Actions
-- Teori frågor (kommer senare)
+- Teorifrågor (kommer senare)
 
 ## Teststrategi 
 Projektet använder flera nivåer av tester:
 ### Tekniska tester
 - Pytest för unit och integrationstester
-- Testar backen-logik i klasserna BookStore och FavoriteBooks
+- Testar backend-logik i klasserna BookStore och FavoriteBooks
 
 ### UI tester (BDD)
 - User stories finns ./STORIES.md
 - Acceptanskriterier och scenarios finns ./features/feature-filer
   - skrivna i Gherkin-format
-- Step filer för att implementera tester med Behave och Playwright
+- Step filer för att implementera tester med Behave och 
+- Scenario Outline används för BDD Scenario i add-book
 - Testar applikationen ur ett användarperspektiv
-
-### Sammanfattning
-- Unit tester → testar enskilda metoder
-- Integrationstester → testar samspel mellan klasser
-- UI-tester → testar hela flöden i användargränssnittet
 
 ## Dokumentation
 TODO
@@ -38,6 +34,7 @@ TODO
 ## Installation
 ```bash
 pip install -r requirements.txt
+playwright install
 ```
 ## Kör tester
 
