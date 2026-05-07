@@ -3,8 +3,9 @@ from features.pages.app_page import AppPage
 
 
 def before_all(context):
+    headless = context.config.userdata.getbool("headless", False)
     context.playwright = sync_playwright().start()
-    context.browser = context.playwright.chromium.launch(headless=False)
+    context.browser = context.playwright.chromium.launch(headless=headless)
 
 def before_scenario(context, scenario):
     context.page = context.browser.new_page()
