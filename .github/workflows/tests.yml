@@ -36,4 +36,5 @@ jobs:
         run: |
           behave features/navigation.feature
           behave features/add_book.feature
+          behave features/favorites.feature
           

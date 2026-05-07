@@ -2,29 +2,29 @@ from features.pages.base_page import BasePage
 
 
 class AppPage(BasePage):
-    URL = "https://tap-ht25-testverktyg.github.io/exam/"
 
     VIEWS = {
-        "Katalog":{
-            "button":"catalog",
-            "view":".catalog",
+        "Katalog": {
+            "button": "catalog",
+            "view": ".catalog",
+            "item_testid_prefix": "star",
         },
-        "Lägg till bok":{
-            "button":"add-book",
-            "view":".form",
+        "Lägg till bok": {
+            "button": "add-book",
+            "view": ".form",
         },
-        "Mina böcker":{
-            "button":"favorites",
-            "view":".favorites",
+        "Mina böcker": {
+            "button": "favorites",
+            "view": ".favorites",
+            "item_testid_prefix": "fav",
         },
-        "Statistik":{
-            "button":"statistics",
-            "view":".stats",
+        "Statistik": {
+            "button": "statistics",
+            "view": ".stats",
         },
     }
 
-    def open(self):
-        self.page.goto(self.URL)
+    # --- Navigation ---
 
     # Kontrollerar att alla navigeringsknappar finns på sidan.
     def navigation_is_visible(self):
@@ -36,7 +36,14 @@ class AppPage(BasePage):
 
     # Kontrollerar att rätt vy visas efter navigation.
     def view_is_visible(self, view_name):
-        return self.page.locator(self.VIEWS[view_name]["view"]).is_visible()
+        return self.page.get_by_test_id(self.VIEWS[view_name]["button"]).is_disabled()
+
+    # Kontrollerar avsett startläge och navigerar mellan olika navigerings knappar
+    def go_to(self, view_name):
+        if not self.view_is_visible(view_name):
+            self.click_navigation(view_name)
+
+    # --- Lägg till bok---
 
     # Fyller i titel i formuläret.
     def fill_title(self, title):
@@ -50,15 +57,51 @@ class AppPage(BasePage):
     def click_add_new_book(self):
         self.page.get_by_test_id("add-submit").click()
 
-    # Kontrollerar att böcker visas i katalogen.
-    def book_is_visible_in_catalog(self, title):
-        return self.page.get_by_test_id(f"star-{title}").is_visible()
-
     # Kontrollerar att formulärfälten är tomma.
     def form_fields_are_empty(self):
-        return (self.page.get_by_test_id("add-input-title").input_value() == ""
-                and self.page.get_by_test_id("add-input-author").input_value() == "")
+        title = self.page.get_by_test_id("add-input-title").input_value()
+        author = self.page.get_by_test_id("add-input-author").input_value()
+        return title == "" and author == ""
 
     # Kontrollerar att knappen Lägg till ny bok är inaktiv.
     def add_submit_button_is_disabled(self):
         return self.page.get_by_test_id("add-submit").is_disabled()
+
+
+    # --- Bok-items i Katalog och Mina böcker ---
+
+    # Hjälpmetod: returnerar locator för en boks item i angiven vy.
+    def _book_item(self, view_name, title):
+        prefix = self.VIEWS[view_name]["item_testid_prefix"]
+        return self.page.get_by_test_id(f"{prefix}-{title}")
+
+    # Kontrollerar att en bok visas i angiven vy (Katalog eller Mina böcker).
+    def book_in_view_is_visible(self, view_name, title):
+        return self._book_item(view_name, title).is_visible()
+
+    # Räknar förekomster av en bok i angiven vy.
+    def book_in_view_count(self, view_name, title):
+        return self._book_item(view_name, title).count()
+
+    # --- Favoritmarkering Katalog ---
+
+    # Returnerar locator för Hjärta på en bok.
+    def _star(self, title):
+        return self.page.get_by_test_id(f"star-{title}")
+
+    # Klickar på hjärta för att markera/avmarkera bok som favorit.
+    def toggle_favorite(self, title):
+        self._star(title).click()
+
+    def is_marked_as_favorite(self, title):
+        class_name = self._star(title).get_attribute("class") or ""
+        return "selected" in class_name
+
+
+    # --- Favoritlistan Mina böcker ---
+
+    # Kontrollerar att favoritlistan är tom.
+    # Listan har test-id "book-list" och innehåller <li>-element per favorit.
+    def favorites_list_is_empty(self):
+        return self.page.get_by_test_id("book-list").locator("li").count() == 0
+
