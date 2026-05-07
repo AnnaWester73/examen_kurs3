@@ -22,10 +22,7 @@ def step_click_add_new_book(context):
 
 @then('ska boken "{title}" visas i katalogen')
 def step_book_visible_in_catalog(context, title):
-    if not context.app_page.view_is_visible("Katalog"):
-        context.app_page.click_navigation("Katalog")
-
-    assert context.app_page.book_is_visible_in_catalog(title)
+    assert context.app_page.book_in_view_is_visible("Katalog", title)
 
 @then("ska fälten vara tomma")
 def step_form_fields_empty(context):

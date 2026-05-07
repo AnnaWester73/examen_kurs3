@@ -8,17 +8,18 @@ Feature: Navigera mellan olika vyer
     Given att jag öppnar Läslistan
     Then ska vyn "Katalog" visas
 
-  Scenario: Navigera till Lägg till bok
+  Scenario Outline: Navigera mellan vyer
+    Given att jag öppnar Läslistan
+    When jag klickar på "<view>"
+    Then ska vyn "<view>" visas
+    Examples:
+      | view          |
+      | Lägg till bok |
+      | Mina böcker   |
+      | Statistik     |
+
+  Scenario: Återgå till Katalog efter att ha bytt vy
     Given att jag öppnar Läslistan
     When jag klickar på "Lägg till bok"
-    Then ska vyn "Lägg till bok" visas
-
-  Scenario: Navigera till Mina böcker
-    Given att jag öppnar Läslistan
-    When jag klickar på "Mina böcker"
-    Then ska vyn "Mina böcker" visas
-
-  Scenario: Navigera till Statistik
-    Given att jag öppnar Läslistan
-    When jag klickar på "Statistik"
-    Then ska vyn "Statistik" visas
+    And jag klickar på "Katalog"
+    Then ska vyn "Katalog" visas
