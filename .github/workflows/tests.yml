@@ -35,3 +35,5 @@ jobs:
       - name: Run behave
         run: |
           behave features/navigation.feature
+          behave features/add_book.feature
+          

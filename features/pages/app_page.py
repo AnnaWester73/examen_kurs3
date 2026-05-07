@@ -37,3 +37,28 @@ class AppPage(BasePage):
     # Kontrollerar att rätt vy visas efter navigation.
     def view_is_visible(self, view_name):
         return self.page.locator(self.VIEWS[view_name]["view"]).is_visible()
+
+    # Fyller i titel i formuläret.
+    def fill_title(self, title):
+        self.page.get_by_test_id("add-input-title").fill(title)
+
+    # Fyller i författare i formuläret.
+    def fill_author(self, author):
+        self.page.get_by_test_id("add-input-author").fill(author)
+
+    # Klickar på knappen för att lägga till ny bok.
+    def click_add_new_book(self):
+        self.page.get_by_test_id("add-submit").click()
+
+    # Kontrollerar att böcker visas i katalogen.
+    def book_is_visible_in_catalog(self, title):
+        return self.page.get_by_test_id(f"star-{title}").is_visible()
+
+    # Kontrollerar att formulärfälten är tomma.
+    def form_fields_are_empty(self):
+        return (self.page.get_by_test_id("add-input-title").input_value() == ""
+                and self.page.get_by_test_id("add-input-author").input_value() == "")
+
+    # Kontrollerar att knappen Lägg till ny bok är inaktiv.
+    def add_submit_button_is_disabled(self):
+        return self.page.get_by_test_id("add-submit").is_disabled()

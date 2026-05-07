@@ -22,7 +22,8 @@ Feature: Lägg till bok
     And jag fyller i titel "Annas mat"
     And jag fyller i författare "Anna Bergström"
     And jag klickar på Lägg till ny bok
-    Then ska båda böckerna visas i katalogen
+    Then ska boken "Nybörjarkurs i Python" visas i katalogen
+    And ska boken "Annas mat" visas i katalogen
 
   Scenario Outline: Hindra att lägga till bok med saknade fält
     Given att jag öppnar vyn Lägg till bok
@@ -31,6 +32,6 @@ Feature: Lägg till bok
     Then ska knappen Lägg till ny bok vara inaktiv
     Examples:
       |title                 |author           |
-      |                      |Astrid Lindgren  |
-      |Madicken              |                 |
+      |<null>                |Astrid Lindgren  |
+      |Madicken              |<null>           |
 
