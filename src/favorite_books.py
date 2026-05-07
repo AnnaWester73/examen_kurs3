@@ -3,7 +3,11 @@ class FavoriteBooks:
         self.books = []
 
     def add(self, book):
-        self.books.append(book)
+        if book not in self.books:
+            self.books.append(book)
 
     def remove(self, book):
         self.books.remove(book)
+
+    def count(self):
+        return len(self.books)

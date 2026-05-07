@@ -16,3 +16,5 @@ class BookStore:
             if book["id"] == book_id:
                 book["favorite"] = not book["favorite"]
                 return book
+
+        raise ValueError(f"Ingen bok med id {book_id}")
