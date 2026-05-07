@@ -8,6 +8,9 @@ def step_open_add_book_view(context):
 
 @when('jag fyller i titel "{title}"')
 def step_fill_title(context, title):
+    # "<null>" används som platshållare i Examples-tabellen för att
+    # representera ett tomt fält. Behaves parse-matcher hanterar inte
+    # tomma strängar i Scenario Outlines tillförlitligt.
     if title != "<null>":
         context.app_page.fill_title(title)
 

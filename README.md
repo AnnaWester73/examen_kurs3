@@ -1,36 +1,28 @@
 # Examensarbeta för kurs 3 - Testautomatisering och testverktyg
 ### Inlämning: Anna Wester
 
+Webbsidan som testas: <https://tap-ht25-testverktyg.github.io/exam/>
+
 ## Projektet innehåll
-Se länk:
-```
-https://docs.google.com/document/d/1YFubvcXCJx71fedHHOjv6RWh-vhmXFRmh602V8g1WGo/edit?tab=t.0
-```
+Projektet innehåller tester på flera nivåer för att täcka både backend-logik
+och webbsidans funktionalitet ur ett användarperspektiv.
+
+### Backend (pytest)
+Backend-koden i `src/` består av två klasser, `BookStore` och `FavoriteBooks`, som utvecklats med TDD.
 - Backend-logik för att hantera en lista med böcker
 - Enhetstester (pytest)
 - Integrationstester (pytest)
-- Frontend-del
-- BDD-tester med Behave och Playwright
-- CI med GitHub Actions
-- Teorifrågor (kommer senare)
 
-## Teststrategi 
-Projektet använder flera nivåer av tester:
-### Tekniska tester
-- Pytest för unit och integrationstester
-- Testar backend-logik i klasserna BookStore och FavoriteBooks
+### Frontend (Behave + Playwright)
+- BDD-tester
+- Testerna använder Page Object för att hålla logiken kring webbsidans element separat från stegfilerna
+- Scenario Online för att validera när fält är tomt i lägg till bok och navigering
 
-### UI tester (BDD)
-- User stories finns ./STORIES.md
-- Acceptanskriterier och scenarios finns ./features/feature-filer
-  - skrivna i Gherkin-format
-- Step filer för att implementera tester med Behave och 
-- Scenario Outline används för BDD Scenario i add-book
-- Testar applikationen ur ett användarperspektiv
+### Continuous Integration
+- GitHub Actions kör alla tester automatiskt vid push till `main`. Behave körs headless i CI för att fungera i miljön.
 
-## Dokumentation
-TODO
 
+#
 ## Installation
 ```bash
 pip install -r requirements.txt
@@ -38,20 +30,55 @@ playwright install
 ```
 ## Kör tester
 
-### Kör alla tester
+### Pytest (unit + integration)
+Kör alla pytest-tester:
 ```bash
 pytest
 ```
-### Kör unit tester
+
+Kör bara unit-tester:
 ```bash
 pytest -m unit
 ```
-### Kör integrations tester
+
+Kör bara integrationstester:
 ```bash
 pytest -m integration
 ```
-## Kör behave tester
+### Behave (BDD)
+
+Kör alla feature-filer:
 ```bash
-behave TODO
+behave
 ```
 
+Kör en specifik feature-fil:
+```bash
+behave features/add_book.feature
+```
+
+Kör headless (utan att webbläsarfönster öppnas):
+```bash
+behave -D headless=true
+```
+## Projektstruktur
+
+```
+examen_kurs3/
+├── .github/workflows/tests.yml    CI-konfiguration
+├── src/                           Backend-kod (BookStore, FavoriteBooks)
+├── tests/
+│   ├── unit/                      Unit-tester
+│   └── integration/               Integrationstester
+├── features/
+│   ├── pages/                     Page Object-klasser
+│   ├── steps/                     Stegfiler
+│   ├── environment.py             Behave-konfiguration
+│   └── *.feature                  Feature-filer
+├── ANSWERS.md                     Svar på teorifrågor
+├── STORIES.md                     User stories
+├── README.md                      Denna fil
+├── pytest.ini                     Pytest-konfiguration
+├── behave.ini                     Behave-konfiguration
+└── requirements.txt               Beroenden
+```

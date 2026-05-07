@@ -1,3 +1,4 @@
+import re
 from features.pages.base_page import BasePage
 
 
@@ -28,7 +29,7 @@ class AppPage(BasePage):
 
     # Kontrollerar att alla navigeringsknappar finns på sidan.
     def navigation_is_visible(self):
-        return all(self.page.get_by_test_id(view["button"]).is_visible()for view in self.VIEWS.values())
+        return all(self.page.get_by_test_id(view["button"]).is_visible() for view in self.VIEWS.values())
 
     # Klickar på rätt navigeringsknapp utifrån vynamn.
     def click_navigation(self, view_name):
@@ -93,6 +94,7 @@ class AppPage(BasePage):
     def toggle_favorite(self, title):
         self._star(title).click()
 
+    # Kontrollerar att en bok är favoritmarkerad
     def is_marked_as_favorite(self, title):
         class_name = self._star(title).get_attribute("class") or ""
         return "selected" in class_name
@@ -105,3 +107,28 @@ class AppPage(BasePage):
     def favorites_list_is_empty(self):
         return self.page.get_by_test_id("book-list").locator("li").count() == 0
 
+
+    # --- Statistik ---
+
+    # Hjälpmetod: plockar ut första heltalet ur en text.
+    def _extract_number(self, text):
+        match = re.search(r"\d+", text)
+        return int(match.group()) if match else None
+
+    # Returnerar totalt antal böcker som heltal.
+    def stats_total_books(self):
+        text = self.page.get_by_test_id("book-count").inner_text()
+        return self._extract_number(text)
+
+    # Returnerar antal favoritmarkerade böcker som heltal.
+    def stats_favorite_books(self):
+        text = self.page.get_by_test_id("stars-count").inner_text()
+        return self._extract_number(text)
+
+    # Kontrollerar att totalt antal böcker visas i statistikvyn.
+    def stats_total_is_visible(self):
+        return self.page.get_by_test_id("book-count").is_visible()
+
+    # Kontrollerar att antal favoritmarkerade böcker visas i statistikvyn.
+    def stats_favorites_is_visible(self):
+        return self.page.get_by_test_id("stars-count").is_visible()
