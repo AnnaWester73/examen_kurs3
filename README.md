@@ -18,8 +18,16 @@ Backend-koden i `src/` består av två klasser, `BookStore` och `FavoriteBooks`,
 - Testerna använder Page Object för att hålla logiken kring webbsidans element separat från stegfilerna
 - Scenario Online för att validera när fält är tomt i lägg till bok och navigering
 
-### Continuous Integration
-- GitHub Actions kör alla tester automatiskt vid push till `main`. Behave körs headless i CI för att fungera i miljön.
+### CI i GitHub
+- GitHub Actions kör alla tester automatiskt vid push till `main`. Behave körs headless i CI.
+
+### Designval och avgränsningar
+
+## Hantering av favoriter
+`BookStore` har en intern `FavoriteBooks` och delegerar favorithantering dit, så favoritlistan har bara en sanningskälla.
+
+## Mock-tester
+Jag använder inte mock-tester. Klasserna är små och välavgränsade, och integrationstesterna täcker samspelet mellan dem på ett naturligt sätt.
 
 
 #
