@@ -1,7 +1,11 @@
-# Examensarbeta för kurs 3 - Testautomatisering och testverktyg
+# Examensarbete för kurs 3 - Testautomatisering och testverktyg
 ### Inlämning: Anna Wester
 
 Webbsidan som testas: <https://tap-ht25-testverktyg.github.io/exam/>
+
+Detta projekt är ett examensarbete som demonstrerar testautomatisering på flera nivåer. 
+Det innehåller backend-kod utvecklad med TDD samt BDD-tester som verifierar funktionaliteten 
+i webbsidan "Läslistan".
 
 ## Projektet innehåll
 Projektet innehåller tester på flera nivåer för att täcka både backend-logik
@@ -9,28 +13,26 @@ och webbsidans funktionalitet ur ett användarperspektiv.
 
 ### Backend (pytest)
 Backend-koden i `src/` består av två klasser, `BookStore` och `FavoriteBooks`, som utvecklats med TDD.
-- Backend-logik för att hantera en lista med böcker
-- Enhetstester (pytest)
-- Integrationstester (pytest)
 
+- 20 enhetstester (för `BookStore` och `FavoriteBooks`)
+- 3 integrationstester (för samspelet mellan klasserna)
+- 
 ### Frontend (Behave + Playwright)
-- BDD-tester
-- Testerna använder Page Object för att hålla logiken kring webbsidans element separat från stegfilerna
-- Scenario Online för att validera när fält är tomt i lägg till bok och navigering
+- 22 scenarier över 4 feature-filer
+- Page Object för att hålla logiken kring webbsidans element separat från stegfilerna
+- Scenario Outline för att testa varianter i `add_book` och `navigation`
 
 ### CI i GitHub
 - GitHub Actions kör alla tester automatiskt vid push till `main`. Behave körs headless i CI.
 
 ### Designval och avgränsningar
 
-## Hantering av favoriter
+**Hantering av favoriter**
 `BookStore` har en intern `FavoriteBooks` och delegerar favorithantering dit, så favoritlistan har bara en sanningskälla.
 
-## Mock-tester
+**Mock-tester**
 Jag använder inte mock-tester. Klasserna är små och välavgränsade, och integrationstesterna täcker samspelet mellan dem på ett naturligt sätt.
 
-
-#
 ## Installation
 ```bash
 pip install -r requirements.txt

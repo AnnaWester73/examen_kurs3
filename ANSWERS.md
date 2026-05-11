@@ -9,7 +9,7 @@
 
 
 ## 2. Beskriv hur det går till när man arbetar med TDD
-TDD står för Test-Driven Development och följer en det som kallas Red-Green-Refactor:
+TDD står för Test-Driven Development och följer det som kallas Red-Green-Refactor:
 
 1. Red — skriv ett test som beskriver önskat beteende. Testet failar eftersom funktionen inte finns än.
 2. Green — skriv minsta möjliga kod för att få testet att passera.
@@ -25,7 +25,7 @@ I detta projekt har jag använt TDD för backend-koden i `BookStore` och `Favori
 - BDD utgår från ett användarperspektiv. 
 - Testerna skrivs i Gherkin-syntax (Given/When/Then) som beskriver flöden i klartext. 
 - Tanken är att även icke-tekniska personer ska kunna läsa testerna.
-- BDD utgår ofta från "User stories", vilket gör testerna följer affärsbehov i applikationen.
+- BDD utgår ofta från "User stories", vilket gör att testerna följer affärsbehov i applikationen.
 - BDD och TDD kompletterar varandra. I detta projekt har jag använt TDD för backend och BDD för webbsidans funktioner.
 
 
