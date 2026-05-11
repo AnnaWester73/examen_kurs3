@@ -53,3 +53,42 @@ def test_add_same_book_twice_only_stores_once():
     favorites.add(book)
 
     assert favorites.count() == 1
+
+# Testar att has() returnerar True för en bok som är i favoriter.
+@pytest.mark.unit
+def test_has_returns_true_when_book_in_favorites():
+    favorites = FavoriteBooks()
+    book = {"id": 1, "author": "Anna Wester", "title": "Nybörjarkurs i Python"}
+
+    favorites.add(book)
+
+    assert favorites.has(book) is True
+
+# Testar att has() returnerar False för en bok som inte är i favoriter.
+@pytest.mark.unit
+def test_has_returns_false_when_book_not_in_favorites():
+    favorites = FavoriteBooks()
+    book = {"id": 1, "author": "Anna Wester", "title": "Nybörjarkurs i Python"}
+
+    assert favorites.has(book) is False
+
+# Testar att toggle() lägger till en bok som inte är favorit.
+@pytest.mark.unit
+def test_toggle_adds_book_when_not_in_favorites():
+    favorites = FavoriteBooks()
+    book = {"id": 1, "author": "Anna Wester", "title": "Nybörjarkurs i Python"}
+
+    favorites.toggle(book)
+
+    assert favorites.has(book) is True
+
+# Testar att toggle() tar bort en bok som redan är favorit.
+@pytest.mark.unit
+def test_toggle_removes_book_when_in_favorites():
+    favorites = FavoriteBooks()
+    book = {"id": 1, "author": "Anna Wester", "title": "Nybörjarkurs i Python"}
+
+    favorites.add(book)
+    favorites.toggle(book)
+
+    assert favorites.has(book) is False

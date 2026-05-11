@@ -35,7 +35,7 @@ def test_add_multiple_books_in_book_stores():
 def test_bookstore_starts_with_empty_list():
     store = BookStore()
 
-    assert store.books == []
+    assert len(store.books) == 0
 
 # Test där book får ett unikt id
 @pytest.mark.unit
@@ -63,7 +63,7 @@ def test_add_book_sets_favorite_to_false():
 
     book = store.addBook("Anna Wester", "Nybörjarkurs i Python")
 
-    assert book["favorite"] is False
+    assert store.hasFavorite(book["id"]) is False
 
 # Testar att en bok kan markeras som favorit.
 @pytest.mark.unit
@@ -74,7 +74,7 @@ def test_toggle_favorite_sets_book_to_true():
 
     store.toggleFavorite(book["id"])
 
-    assert book["favorite"] is True
+    assert store.hasFavorite(book["id"]) is True
 
 # Testar att en bok kan växla mellan favorit och inte favorit.
 @pytest.mark.unit
@@ -86,8 +86,15 @@ def test_toggle_favorite_twice_sets_book_to_false():
     store.toggleFavorite(book["id"])
     store.toggleFavorite(book["id"])
 
-    assert book["favorite"] is False
+    assert store.hasFavorite(book["id"]) is False
 
+# Testar att hasFavorite på okänt id ger ValueError.
+@pytest.mark.unit
+def test_has_favorite_with_unknown_id_raises_error():
+    store = BookStore()
+
+    with pytest.raises(ValueError):
+        store.hasFavorite(999)
 
 # Testar att toggle_favorite på okänt id ger ValueError.
 @pytest.mark.unit
