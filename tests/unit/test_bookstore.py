@@ -1,7 +1,7 @@
 import pytest
 from src.bookstore import BookStore
 
-# Test att skapa en book med författare och title
+# Test att skapa en bok med författare och title
 @pytest.mark.unit
 def test_add_book_returns_book_with_author_and_title():
     store = BookStore()
@@ -37,7 +37,7 @@ def test_bookstore_starts_with_empty_list():
 
     assert len(store.books) == 0
 
-# Test där book får ett unikt id
+# Test där bok får ett unikt id
 @pytest.mark.unit
 def test_add_book_and_give_book_an_id():
     store = BookStore()
@@ -58,7 +58,7 @@ def test_add_multiple_books_gives_unique_ids():
 
 # Testar att en ny bok inte är markerad som favorit.
 @pytest.mark.unit
-def test_add_book_sets_favorite_to_false():
+def test_new_book_is_not_marked_as_favorite():
     store = BookStore()
 
     book = store.addBook("Anna Wester", "Nybörjarkurs i Python")
@@ -67,7 +67,7 @@ def test_add_book_sets_favorite_to_false():
 
 # Testar att en bok kan markeras som favorit.
 @pytest.mark.unit
-def test_toggle_favorite_sets_book_to_true():
+def test_toggle_favorite_marks_book_as_favorite():
     store = BookStore()
 
     book = store.addBook("Anna Wester", "Nybörjarkurs i Python")
@@ -78,7 +78,7 @@ def test_toggle_favorite_sets_book_to_true():
 
 # Testar att en bok kan växla mellan favorit och inte favorit.
 @pytest.mark.unit
-def test_toggle_favorite_twice_sets_book_to_false():
+def test_toggle_favorite_twice_unmarks_book():
     store = BookStore()
 
     book = store.addBook("Anna Wester", "Nybörjarkurs i Python")

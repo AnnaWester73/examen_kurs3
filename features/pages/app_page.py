@@ -39,12 +39,16 @@ class AppPage(BasePage):
     def view_is_visible(self, view_name):
         return self.page.get_by_test_id(self.VIEWS[view_name]["button"]).is_disabled()
 
-    # Kontrollerar avsett startläge och navigerar mellan olika navigerings knappar
+    # Navigerar till angiven vy, om vi inte redan är där.
+    # Skyddar mot att klicka på en redan aktiv (disabled) nav-knapp.
+    def go_to(self, view_name):
+        if not self.view_is_visible(view_name):
+            self.click_navigation(view_name)
     def go_to(self, view_name):
         if not self.view_is_visible(view_name):
             self.click_navigation(view_name)
 
-    # --- Lägg till bok---
+    # --- Lägg till bok ---
 
     # Fyller i titel i formuläret.
     def fill_title(self, title):

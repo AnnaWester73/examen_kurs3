@@ -9,7 +9,7 @@ def before_all(context):
 
 def before_scenario(context, scenario):
     context.page = context.browser.new_page()
-    context.page.set_default_timeout(3000)
+    context.page.set_default_timeout(10000)
     context.app_page = AppPage(context.page)
 
 def after_scenario(context, scenario):

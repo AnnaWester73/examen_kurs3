@@ -36,5 +36,3 @@ Feature: Lägg till bok
       | title    | author          |
       | <null>   | Astrid Lindgren |
       | Madicken | <null>          |
-
-
